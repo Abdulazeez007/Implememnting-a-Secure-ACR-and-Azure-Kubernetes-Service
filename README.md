@@ -70,6 +70,17 @@ _ Then, In the Bash session within the Cloud Shell pane, run the following to li
 
 ## STEP 4: Grant the AKS cluster permissions to access the ACR and manage its virtual network.
 - within the CloudShell pane, configure the AKS cluster to use the Azure Container Registry created earlier.
-- run the following command
+- run the following command:
+
        ***ACRNAME=$(az acr list --resource-group AuroraRG --query '[].{Name:name}' --output tsv) az aks update -n AuroraKubernetsCluster -g AuroraRG --attach-acr $ACRNAME***
 
+- This command grants the ‘acrpull’ role assignment to the ACR. ***the arcpull role assignment, allows ACR the permission to pull Images.***
+- run the following to grant the AKS cluster the Contributor role to its virtual network.
+
+       ***RG_AKS=AuroraRG***
+       ***RG_VNET=MC_AuroraRG_AuroraKubernetsCluster_centralus***
+       ***AKS_VNET_NAME=aks-vnet-73636518***  
+       ***AKS_CLUSTER_NAME=AuroraKubernetsCluster***   
+       ***AKS_VNET_ID=$(az network vnet show --name $AKS_VNET_NAME --resource-group $RG_VNET --query id -o tsv)***   
+       ***AKS_MANAGED_ID=$(az aks show --name $AKS_CLUSTER_NAME --resource-group $RG_AKS --query identity.principalId -o tsv)***   
+       ***az role assignment create --assignee $AKS_MANAGED_ID --role "Contributor" --scope $AKS_VNET_ID***
