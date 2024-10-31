@@ -119,5 +119,60 @@ _ Then, In the Bash session within the Cloud Shell pane, run the following to li
 ![SOC]()
 
 - Review the output and record the value in the External-IP column.
+
         ***48.214.188.216 ***
-- Open a new browser tab and browse to the IP address.  
+- Open a new browser tab and browse to the IP address.
+
+**And here we have it live** 
+![SOC]()
+
+## STEP 7: Deploy an Internal Service to AKS
+- Within the Cloud Shell pane, run the following to open the nginxintenal .yaml file, so you can edit its content:
+
+       ***code ./nginxinternal.yaml***
+  
+- Scroll down to the line containing the reference to the container image and replace the <ACRUniquename> placeholder with the ACR name, like we did previously.
+- In the Bash session within the CloudShell pane, run the following to apply the change to the cluster:
+
+        ***kubectl apply -f nginxinternal.yaml***
+-Next, within the CloudShell pane, run the following to retrieve information about the nginxinternal service including name, type, IP addresses, and ports.
+
+       ***kubectl get service nginxinternal***
+![SOC]()
+
+- Review the output. The External-IP is, in this case, a private IP address.
+- Take note of the External IP, in my case it’s:
+
+         ***10.224.0.6***
+- To access the internal service endpoint, you will connect interactively to one of the pods running in the cluster.
+
+## STEP 8: Verify the you can access an internal AKS-hosted service
+- Use one of the pods running on the AKS cluster to access the internal service.
+- Within the CloudShell pane, run the following to list the pods in the default namespace on the AKS cluster:
+
+        ***kubectl get pods***
+
+  [SOC]()
+
+- In the listing of the pods, copy the first entry in the NAME column.
+- Within the CloudShell pane, run the following to connect interactively to the first pod.
+
+      ***kubectl exec -it nginxexternal-6dcf4ff85d-l84kl -- /bin/bash***
+
+![SOC]()
+
+- Note how i added the name of the first pod to the command to connect to it.
+- Now we’re in, I’m connected to the first pod within our bash pane.
+- Within the CloudShell pane, run the following to verify that the nginx web site is available via the private IP address of the service.
+
+      ***curl http://10.224.0.6***
+
+![SOC]()
+
+- We’ve successfully accessed the internal service.
+- If we try to publicly access this service on my browser, we can observe that it won’t work, because it’s strictly an internal service that can only be accessed within the network.
+
+![SOC]()  
+
+
+***This brings us to the conclusion of our lab, as we have successfully configured and secured both the Azure Container Registry (ACR) and Azure Kubernetes Service (AKS).***
