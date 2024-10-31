@@ -59,7 +59,7 @@ This project focuses on advanced configuration and security hardening of Azure C
 
 ### Next, from the Azure Portal, navigate back to the CloudShell.
 - In the Bash session within the Cloud Shell pane, run the following to connect to the Kubernetes cluster:
-      ***az aks get-credentials --resource-group AuroraRG --name AuroraKubernetesCluster***
+      ***az aks get-credentials --resource-group AuroraRG --name AuroraKubernetsCluster***
   
 _ Then, In the Bash session within the Cloud Shell pane, run the following to list nodes of the Kubenetes cluster:
       ***kubectl get nodes***
@@ -75,7 +75,7 @@ _ Then, In the Bash session within the Cloud Shell pane, run the following to li
        ***ACRNAME=$(az acr list --resource-group AuroraRG --query '[].{Name:name}' --output tsv) az aks update -n AuroraKubernetsCluster -g AuroraRG --attach-acr $ACRNAME***
 
 - This command grants the ‘acrpull’ role assignment to the ACR. ***the arcpull role assignment, allows ACR the permission to pull Images.***
-- run the following to grant the AKS cluster the Contributor role to its virtual network.
+- Run the following to grant the AKS cluster the Contributor role to its virtual network.
 
        ***RG_AKS=AuroraRG***
        ***RG_VNET=MC_AuroraRG_AuroraKubernetsCluster_centralus***
@@ -84,3 +84,40 @@ _ Then, In the Bash session within the Cloud Shell pane, run the following to li
        ***AKS_VNET_ID=$(az network vnet show --name $AKS_VNET_NAME --resource-group $RG_VNET --query id -o tsv)***   
        ***AKS_MANAGED_ID=$(az aks show --name $AKS_CLUSTER_NAME --resource-group $RG_AKS --query identity.principalId -o tsv)***   
        ***az role assignment create --assignee $AKS_MANAGED_ID --role "Contributor" --scope $AKS_VNET_ID***
+  
+  - The contributor role grants read and write access to AKS Clusters.
+  
+![SOC]()
+
+## STEP 5: Deploy an external service to AKS.
+- Download the Manifest files, edit the YAML file, and apply your changes to the cluster.
+- Download the Internal and External .yaml config file from Microsoft’s git: ***https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies/tree/master/Allfiles/Labs/09***
+- In the Bash session within the Cloud Shell pane, click the Manage files icon, in the drop-down menu,
+- Click Upload, in the Open dialog box, naviate to the location where you downloaded the lab files,
+- Select nginxexternal.yaml click Open.
+- Next, nginxinternal.yaml, and click Open.
+
+![SOC]()
+
+**Now,** In the Bash session within the CloudShell pane, run the following to open the nginxexternal.yaml file, 
+
+       ***code ./nginxexternal.yaml***
+- In the editor pane, scroll down to line 24 and replace the <ACRUniquename> placeholder with the ACR name, which in my case is: ***aurora2608131553***
+- click Save and then click Close editor.
+- Within the CloudShell pane, run the following to apply the change to the cluster:
+
+      ***kubectl apply -f nginxexternal.yaml***
+![SOC]()
+  
+** This verifies that the deployment and the corresponding service have been created.
+
+## STEP 6: Verify the you can access an external AKS-hosted service.
+- Within the CloudShell pane, run the following to retrieve information about the nginxexternal service including name, type, IP addresses, and ports.
+
+      ***kubectl get service nginxexternal***
+
+![SOC]()
+
+- Review the output and record the value in the External-IP column.
+        ***48.214.188.216 ***
+- Open a new browser tab and browse to the IP address.  
