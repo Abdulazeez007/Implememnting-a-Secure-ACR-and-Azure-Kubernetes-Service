@@ -66,7 +66,7 @@ This project focuses on advanced configuration and security hardening of Azure C
 _ Then, In the Bash session within the Cloud Shell pane, run the following to list nodes of the Kubenetes cluster:
       ***kubectl get nodes***
 
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/GetNodes%20External.jpg)
 
 ### We can confirm that the status of the cluster node is marked as Ready.
 
@@ -89,7 +89,7 @@ _ Then, In the Bash session within the Cloud Shell pane, run the following to li
   
   - The contributor role grants read and write access to AKS Clusters.
   
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/Contributor%20permission.jpg)
 
 ## STEP 5: Deploy an external service to AKS.
 - Download the Manifest files, edit the YAML file, and apply your changes to the cluster.
@@ -99,7 +99,7 @@ _ Then, In the Bash session within the Cloud Shell pane, run the following to li
 - Select nginxexternal.yaml click Open.
 - Next, nginxinternal.yaml, and click Open.
 
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/ExternalNginx.jpg)
 
 **Now,** In the Bash session within the CloudShell pane, run the following to open the nginxexternal.yaml file, 
 
