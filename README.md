@@ -21,12 +21,13 @@ This project focuses on advanced configuration and security hardening of Azure C
 - In the Bash session within the Cloud Shell pane, run the following to create a new resource group.
      *** az group create --name AZ500LAB09 --location eastus***
 
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/ACR%20Create.jpg)
 
 ### Next,create a new Azure Container Registry (ACR) instance.
      ***az acr create --resource-group AuroraRG --name aurora$RANDOM$RANDOM --sku Basic***
 
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/ACR.jpg)
+
 ***Ensure to note down the registry Name***
 
 ## STEP 2: Create a Dockerfile, build a container and push it to Azure Container Registry.
@@ -34,7 +35,7 @@ This project focuses on advanced configuration and security hardening of Azure C
 
       ***echo FROM nginx > Dockerfile***
 
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/Dockerfile.jpg)
 
 ### Next, run the following to build an image from the Dockerfile and push the image to the new ACR.
 
@@ -44,19 +45,19 @@ This project focuses on advanced configuration and security hardening of Azure C
 - Now, back to my Azure Portal,
 - Resource group, in the container registry repository, we can see the image listed there, along with it’s SHA digest for Integrity.
 
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/Dockerfile%20nginx.jpg)
 
 ## STEP 3: Create an Azure Kubernetes Service cluster
 - Back to Azure Portal, Search AKS or Azure Kubernetes Services,
 - Configure and Create a new Kubernetes Cluster.
 - In the Networking Tab, you’ll enable Azure CNI, ***this asigns IP Adresses to the pods and ensures that all the pods can be accessed individually.***
 - review and create
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/CreateKub.jpg)
 
 ## Now we have created our AKS Cluster.
 - On the Resource groups blade, in the listing of resource groups, note a new resource group named ***MC_AuroraRG_AuroraKubernetsCluster_centralus*** that holds components of the AKS Nodes.
 
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/AKS%20Cluster.jpg)
 
 ### Next, from the Azure Portal, navigate back to the CloudShell.
 - In the Bash session within the Cloud Shell pane, run the following to connect to the Kubernetes cluster:
