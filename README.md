@@ -109,7 +109,7 @@ _ Then, In the Bash session within the Cloud Shell pane, run the following to li
 - Within the CloudShell pane, run the following to apply the change to the cluster:
 
       ***kubectl apply -f nginxexternal.yaml***
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/ExtApply.jpg)
   
 ** This verifies that the deployment and the corresponding service have been created.
 
@@ -118,7 +118,7 @@ _ Then, In the Bash session within the Cloud Shell pane, run the following to li
 
       ***kubectl get service nginxexternal***
 
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/External%20IP.jpg)
 
 - Review the output and record the value in the External-IP column.
 
@@ -126,7 +126,7 @@ _ Then, In the Bash session within the Cloud Shell pane, run the following to li
 - Open a new browser tab and browse to the IP address.
 
 **And here we have it live** 
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/EXInginx%20Success.jpg)
 
 ## STEP 7: Deploy an Internal Service to AKS
 - Within the Cloud Shell pane, run the following to open the nginxintenal .yaml file, so you can edit its content:
@@ -140,7 +140,7 @@ _ Then, In the Bash session within the Cloud Shell pane, run the following to li
 -Next, within the CloudShell pane, run the following to retrieve information about the nginxinternal service including name, type, IP addresses, and ports.
 
        ***kubectl get service nginxinternal***
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/IntNginxApply.jpg)
 
 - Review the output. The External-IP is, in this case, a private IP address.
 - Take note of the External IP, in my case it’s:
@@ -148,20 +148,20 @@ _ Then, In the Bash session within the Cloud Shell pane, run the following to li
          ***10.224.0.6***
 - To access the internal service endpoint, you will connect interactively to one of the pods running in the cluster.
 
-## STEP 8: Verify the you can access an internal AKS-hosted service
+## STEP 8: Verify you can access an internal AKS-hosted service
 - Use one of the pods running on the AKS cluster to access the internal service.
 - Within the CloudShell pane, run the following to list the pods in the default namespace on the AKS cluster:
 
         ***kubectl get pods***
 
-  [SOC]()
+  [SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/InternalPODS.jpg)
 
 - In the listing of the pods, copy the first entry in the NAME column.
 - Within the CloudShell pane, run the following to connect interactively to the first pod.
 
       ***kubectl exec -it nginxexternal-6dcf4ff85d-l84kl -- /bin/bash***
 
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/Internal-Login.jpg)
 
 - Note how i added the name of the first pod to the command to connect to it.
 - Now we’re in, I’m connected to the first pod within our bash pane.
@@ -169,12 +169,12 @@ _ Then, In the Bash session within the Cloud Shell pane, run the following to li
 
       ***curl http://10.224.0.6***
 
-![SOC]()
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/External%20IP.jpg)
 
 - We’ve successfully accessed the internal service.
 - If we try to publicly access this service on my browser, we can observe that it won’t work, because it’s strictly an internal service that can only be accessed within the network.
 
-![SOC]()  
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/Internal%20Tesyfailed.jpg)  
 
 ## Conclusion and Key Takeaways
 
