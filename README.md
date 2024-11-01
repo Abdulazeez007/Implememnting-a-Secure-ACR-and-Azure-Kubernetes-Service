@@ -14,6 +14,7 @@ This project focuses on advanced configuration and security hardening of Azure C
 
 ## NETWORK TOPOLOGY
 
+![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/TOPOLOGY.jpg)
 
 ## STEP 1: Create an Azure Container Registry
 - First, launch CloudShell from the Azure portal,
