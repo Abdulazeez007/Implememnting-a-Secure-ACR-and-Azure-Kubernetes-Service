@@ -154,7 +154,7 @@ _ Then, In the Bash session within the Cloud Shell pane, run the following to li
 
         ***kubectl get pods***
 
-  [SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/InternalPODS.jpg)
+  ![SOC](https://github.com/Abdulazeez007/Implementing-a-Secure-ACR-and-Azure-Kubernetes-Service/blob/main/AzureKubernetes/InternalPODS.jpg)
 
 - In the listing of the pods, copy the first entry in the NAME column.
 - Within the CloudShell pane, run the following to connect interactively to the first pod.
